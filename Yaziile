@@ -1,0 +1,34 @@
+Function SAYI_YAZI(sayi)
+On Error Resume Next
+Dim deg(3), s(3), deger(2)
+a = Array("", "Bir", "İki", "Üç", "Dört", "Beş", "Altı", "Yedi", "Sekiz", "Dokuz")
+b = Array("", "On", "Yirmi", "Otuz", "Kırk", "Elli", "Altmış", "Yetmiş", "Seksen", "Doksan")
+c = Array("", "", "Bin", "Milyon", "Milyar", "Trilyon")
+deger(1) = Int(sayi)
+deger(2) = Round(sayi - deger(1), 2) * 100
+If sayi = 0 Then son = "sıfır"
+For g = 1 To 2
+yazi = deger(g)
+For d = 1 To Len(yazi) Step 3
+e = e + 1
+deg(1) = Mid(yazi, Len(yazi) - d - 1, 1)
+deg(2) = Mid(yazi, Len(yazi) - d, 1)
+deg(3) = Mid(yazi, Len(yazi) - d + 1, 1)
+If deg(1) <> 0 Then s(1) = Replace(a(deg(1)) & "Yüz", "BirYüz", "Yüz")
+s(2) = b(deg(2))
+s(3) = a(deg(3)) & c(e)
+If deg(1) + deg(2) + deg(3) = 0 Then s(3) = ""
+son = s(1) & s(2) & s(3) & son
+If Left(son, 6) = "BirBin" Then son = Replace(son, "BirBin", "Bin")
+For f = 1 To 3
+deg(f) = ""
+s(f) = ""
+Next
+Next
+If g = 1 And deger(1) <> 0 Then tl = son & " Lira "
+If g = 2 And deger(2) <> 0 Then kr = " " & son & "  Kuruş "
+son = ""
+e = 0
+Next
+SAYI_YAZI = tl & kr
+End Function
